@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import FormattedDate from "./FormattedDate";
 import axios from "axios";
 import "./Weather.css";
 
@@ -10,10 +11,12 @@ export default function Weather() {
       ready: true,
       coordinates: response.data.coordinates,
       temperature: response.data.temperature.current,
+      feels_like: response.data.temperature.feels_like,
       humidity: response.data.temperature.humidity,
-      date: new Date(response.data.dt * 1000),
+      date: new Date(response.data.time * 1000),
       description: response.data.condition.description,
-      icon: response.data.condition.icon,
+      icon_url:
+        "http://shecodes-assets.s3.amazonaws.com/api/weather/icons/broken-clouds-night.png",
       wind: response.data.wind.speed,
       city: response.data.city,
     });
@@ -43,15 +46,17 @@ export default function Weather() {
         </form>
         <h1>{weatherData.city}</h1>
         <ul>
-          <li>Wednesday 23:00</li>
-          <li>{weatherData.description}</li>
+          <li>
+            <FormattedDate date={weatherData.date} />
+          </li>
+          <li className="text-capitalize">{weatherData.description}</li>
         </ul>
         <div className="row mt-3">
           <div className="col-6">
             <div className="clearfix">
               <img
-                src="https://ssl.gstatic.com/onebox/weather/64/cloudy.png"
-                alt="Cloudy"
+                src={weatherData.icon_url}
+                alt={weatherData.description}
                 className="float-left"
               />
               <div className="float-left">
@@ -64,9 +69,9 @@ export default function Weather() {
           </div>
           <div className="col-6">
             <ul>
-              <li>Precipitation: 40% </li>
+              <li>Feels like: {Math.round(weatherData.feels_like)} % </li>
               <li>Humidity: {weatherData.humidity}%</li>
-              <li> Wind: {weatherData.wind} km/h</li>
+              <li>Wind: {Math.round(weatherData.wind)} km/h</li>
             </ul>
           </div>
         </div>
