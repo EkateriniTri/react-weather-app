@@ -6,8 +6,9 @@ import "./Weather.css";
 function App() {
   return (
     <div className="App">
-      <Weather />
-
+      <div className="container">
+        <Weather defaultCity="Tokyo" />
+      </div>
       <footer div className="Footer">
         This project was coded by{""} Katerina Tri {""}and is {""}{" "}
         <a
