@@ -16,6 +16,14 @@ function App() {
           target="_blank"
           rel="noopener noreferrer">
           open-sourced on GitHub
+        </a>{" "}
+        {""}
+        and {""}
+        <a
+          href="https://kat-react-weather-app.netlify.app/"
+          target="_blank"
+          rel="noopener noreferrer">
+          hosted on Netlify
         </a>
       </footer>
     </div>
